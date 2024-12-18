@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>All Blogs</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+
+     <!-- navbar -->
+
+     <nav class="bg-blue-600 p-4 text-white flex justify-between">
+          <div>
+               <a href="{% url 'index' %}"><h1 class="text-3xl font-bold">AI Blog Generator</h1></a>
+          </div>
+          <div>
+               <a href="#" class="text-white mx-4">Welcome {{ user.username }}</a>
+               <a href="{% url 'blog-list' %}" class="text-white hover:underline mx-4">Saved Blog Posts</a>
+               <a href="{% url 'logout' %}" class="text-white hover:text-2xl">Logout</a>
+          </div>
+     </nav>
+
+
+
+     <!-- main content -->
+     <div class="container mx-auto mt-10 px-4 sm:px-0">
+          <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md px-8">
+               <!-- blog post section -->
+               <section>
+                    <h2 class="text-xl mb-4 font-semibold">All Blog Posts</h2>
+                    <div class="space-y-4">
+
+                         {% for blog_article in blog_articles reversed%}
+                         <a href="{% url 'blog-detail' blog_article.id %}">
+                              <div class="border border-gray-300 p-4 rounded-lg my-5">
+                                   <h3 class="text-lg font-semibold">{{ blog_article.youtube_title}}</h3>
+                                   <p class="mx-3 my-3">{{blog_article.generated_content|truncatechars:100}}</p>
+                                   <small>Created At : {{ blog_article.generated_at }}</small>
+                              </div>
+                         </a>
+                         {% endfor %}
+
+                    </div>
+               </section>
+          </div>
+     </div>
+
+
+
+
+
+     <!-- footer -->
+     <footer class="text-center p-4 text-black mt-6">
+          Designed By <a href="#" class="text-bold hover:text-2xl">Rakesh Karki</a>
+     </footer>
+     
+</body>
+</html>
